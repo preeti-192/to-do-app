@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import { FieldErrors } from 'react-hook-form'
+import CustomInput from './common/CustomInput'
 
 interface UseFormInputs {
     firstName: string
@@ -29,25 +30,22 @@ const ToDoForm = (props: IProps) => {
         <div className='px-8 py-10 border rounded-3xl bg-black/50 backdrop:blur-lg max-w-[600px] w-full relative'>
             <p className='text-[90px] absolute -start-14 -top-20 -rotate-12'>😎</p>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
-                <div>
-                    <input {...register('firstName', { required: true })} placeholder='First Name' className='bg-slate-950 border rounded-xl text-white p-3 w-full' />
-                    {errors.firstName && <p className='text-red-500'>First name is required.</p>}
-                </div>
-                <div>
-                    <input {...register('lastName', { required: true })} placeholder='Last Name' className='bg-slate-950 border rounded-xl text-white p-3 w-full' />
-                    {errors.lastName && <p className='text-red-500'>Last name is required.</p>}
-                </div>
-                <div>
-                    <input {...register('email', {
-                        required: 'Email is required',
-                        pattern: {
-                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                            message: 'Please enter a valid email 😬',
-                        },
-                    })}
-                        placeholder='Email' className='bg-slate-950 border rounded-xl text-white p-3 w-full' />
-                    {errors.email?.message && <p className='text-red-500'>{errors.email?.message}</p>}
-                </div>
+            
+                    <CustomInput register={{ ...register('firstName', { required: 'First Name is required' }) }} error={errors.firstName} placeholder="First Name" type="text" />
+              
+                    <CustomInput register={{ ...register('lastName', { required: 'Last Name is required' }) }} error={errors.lastName} placeholder="Last Name" type="text" />
+        
+                    <CustomInput register={{
+                        ...register('email', {
+                            required: 'Email is required',
+                            pattern: {
+                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                message: 'Please enter a valid email 😬',
+                            },
+                        })
+                    }} error={errors.email} placeholder="Email" type="email" />
+
+           
                 <div className='flex gap-3 w-full'>
                     <div className='w-full relative'>
                         <input {...register('password', {
