@@ -20,7 +20,7 @@ const CustomInput = (props: IProps) => {
     const { register, error,placeholder,type } = props
 
     return (
-        <div>
+        <div className='w-full'>
             <input type={type} {...register} placeholder={placeholder} className='bg-slate-950 border rounded-xl text-white p-3 w-full' />
             {error && <p className='text-red-500'>{error.message}</p>}
         </div>
