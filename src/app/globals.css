@@ -27,7 +27,9 @@ body {
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  input{
+    @apply focus:outline-none;
   }
 }
+
+
