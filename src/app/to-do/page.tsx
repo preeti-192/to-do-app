@@ -33,7 +33,7 @@ const ToDoApp = () => {
         <div className="flex min-h-screen flex-col items-center justify-center p-24 gap-6">
             <ToDoForm onSubmit={onSubmit} handleSubmit={handleSubmit} register={register} errors={errors} watch={watch} />
             {formError && <span className='text-red-600'>{formError}</span>}
-            <UserDetailsTable userDetails={userDetails} />
+            {userDetails.length >= 1 ? <UserDetailsTable userDetails={userDetails} setUserDetails={setUserDetails} /> : ''}
         </div>
     )
 }
